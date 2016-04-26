@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">笑话大全</string>
+    <string name="action_settings">设置</string>
+
+    <string name="tab_new_joke">最新笑话</string>
+    <string name="tab_history_joke">笑话回顾</string>
+    <string name="tab_new_pic">最新趣图</string>
+    <string name="tab_history_pic">趣图回顾</string>
+</resources>
