@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="leung.laughhah.ScrollingActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -22,10 +23,16 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/collapsing_image" />
+                android:background="@drawable/collapsing_image" /-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_size_20"
+                android:layout_gravity="center"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -45,7 +52,18 @@
             app:tabTextColor="#FFFFFFFF" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ContentLinear"
+        android:orientation="vertical">
+
+        <leung.laughhah.WrapContentHeightViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <!--android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,18 +75,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView-->
     <!--include layout="@layout/content_scrolling" /-->
 
-    <!--
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
-    -->
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

@@ -32,7 +32,7 @@ public class NewsDetail extends Activity {
 		Bundle data = intent.getExtras();
 		int position = data.getInt("news_id");
 		Log.d("leungadd 接收到的数据", String.valueOf(position));
-		Log.d("leungadd","ScrollingActivity.newsDataList.size=" +ScrollingActivity.newsDataList.size());
+
 
 		News news = FirstTabFragment.newsDataList.get(position-1);
 		news_detail_title.setText(news.getTitle());
