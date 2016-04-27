@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_linearLayout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!--TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3300FFFF"
@@ -12,6 +13,10 @@
         android:minHeight="800dp"
         android:text="TAB 1"
         android:textColor="#FF000000"
-        android:textSize="20dp" />
+        android:textSize="20dp" /-->
+
+    <leung.laughhah.PullToRefreshListView
+        android:id="@+id/frame_listview_news"
+        style="@style/widget_listview" />
 
 </LinearLayout>

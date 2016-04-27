@@ -6,4 +6,9 @@
     <string name="tab_history_joke">笑话回顾</string>
     <string name="tab_new_pic">最新趣图</string>
     <string name="tab_history_pic">趣图回顾</string>
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">下拉刷新</string>
+    <string name="pull_to_refresh_update">最近更新：</string>
 </resources>
