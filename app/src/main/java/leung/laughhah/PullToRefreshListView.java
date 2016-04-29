@@ -2,6 +2,7 @@ package leung.laughhah;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -121,13 +122,17 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 	public void onScroll(AbsListView view, int firstVisiableItem,
 						 int visibleItemCount, int totalItemCount) {
 		firstItemIndex = firstVisiableItem;
+
+		Log.d("leungadd", "firstvisiableitem="+firstVisiableItem +"totalitemCount=" +totalItemCount+"visibleitemcount="+visibleItemCount);
 	}
 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		currentScrollState = scrollState;
+		Log.d("leungadd", "scrollstate=" +scrollState);
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
+		Log.d("leungadd", "ontouchevent action=" +event.getAction());
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			if (firstItemIndex == 0 && !isRecored) {
@@ -339,13 +344,17 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 		int lpHeight = p.height;
 		int childHeightSpec;
 		if (lpHeight > 0) {
+			Log.d("leungadd", "lpHeight="+lpHeight);
 			childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
 					MeasureSpec.EXACTLY);
 		} else {
+			Log.d("leungadd", "22 lpHeight="+lpHeight);
 			childHeightSpec = MeasureSpec.makeMeasureSpec(0,
 					MeasureSpec.UNSPECIFIED);
 		}
 		child.measure(childWidthSpec, childHeightSpec);
 	}
+
+
 
 }

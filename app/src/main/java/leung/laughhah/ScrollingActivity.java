@@ -32,22 +32,23 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager mPager = (ViewPager) findViewById(R.id.viewPager);
         TabFragmentAdapter mPagerAdapter = new TabFragmentAdapter(getSupportFragmentManager(), getApplication());
         mPager.setAdapter(mPagerAdapter);
         tabLayout.setupWithViewPager(mPager);
 
-        layout = (RelativeLayout) findViewById(R.id.ContentLinear);
+        //调整viewpager的位置
+        /*layout = (RelativeLayout) findViewById(R.id.ContentLinear);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) layout.getLayoutParams();
         LinearLayout.LayoutParams appbarparams = (LinearLayout.LayoutParams) appBarLayout.getLayoutParams();
         params.topMargin = appbarparams.height;
-        layout.setLayoutParams(params);
+        layout.setLayoutParams(params);*/
 
     }
 

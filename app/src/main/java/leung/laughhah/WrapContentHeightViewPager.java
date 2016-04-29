@@ -1,8 +1,6 @@
 package leung.laughhah;
 
-/**
- * Created by Leung on 2016/4/26.
- */
+
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;

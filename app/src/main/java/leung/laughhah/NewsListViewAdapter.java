@@ -1,6 +1,7 @@
 package leung.laughhah;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,6 @@ public class NewsListViewAdapter extends BaseAdapter {
 	}
 
 
-
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 
@@ -81,7 +81,6 @@ public class NewsListViewAdapter extends BaseAdapter {
 		} else {
 			listItemView = (ListItemView) convertView.getTag();
 		}
-
 
 		News news = newsDataList.get(position);
 		listItemView.title.setText(news.getTitle());

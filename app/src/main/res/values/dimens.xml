@@ -7,5 +7,5 @@
     <dimen name="text_size_15">15.0dip</dimen>
     <dimen name="text_size_12">12.0dip</dimen>
     <dimen name="text_size_10">10.0dip</dimen>
-    <color name="listitem_gray">#ff9da19e</color>
+
 </resources>

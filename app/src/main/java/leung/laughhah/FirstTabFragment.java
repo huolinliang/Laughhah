@@ -21,13 +21,16 @@ public class FirstTabFragment extends Fragment {
     private News news;
     public static List<News> newsDataList = new ArrayList<News>();
     private NewsListViewAdapter newsListViewAdapter;
-    protected FragmentActivity mActivity;
+    //protected FragmentActivity mActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("leungadd", "firsttabfragment oncreateview");
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
-        this.initNewsData();
-        this.testLoadNewsData();
+        if(newsDataList.size() == 0) {
+            this.initNewsData();
+            this.testLoadNewsData();
+        }
         newsListViewAdapter = new NewsListViewAdapter(getContext(), newsDataList,R.layout.news_list_item);
         pullToRefreshListView = (PullToRefreshListView)rootView.findViewById(R.id.frame_listview_news);
         pullToRefreshListView.setAdapter(newsListViewAdapter);
@@ -43,12 +46,21 @@ public class FirstTabFragment extends Fragment {
                 });
         return rootView;
     }
-
+/*
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (FragmentActivity) activity;
     }
+*/
+    @Override
+    public void onDestroy() {
+        Log.e("leungadd", "FistFragment onDestroy");
+        newsDataList.clear();
+        super.onDestroy();
+    }
+
+
     /**
      * 初始化新闻内容(插入20条新闻测试数据)
      */
@@ -62,7 +74,7 @@ public class FirstTabFragment extends Fragment {
      * 测试读取新闻列表项中的数据
      */
     private void testLoadNewsData() {
-        Log.w("当前newsDataList中新闻数量为", String.valueOf(newsDataList.size()));
+        Log.d("当前DataList中数量为", String.valueOf(newsDataList.size()));
         for (int i = 1; i <= newsDataList.size(); i++) {
             News news = newsDataList.get(i - 1);
             Log.i("第" + i + "条新闻标题", news.getTitle());

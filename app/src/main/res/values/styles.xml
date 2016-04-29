@@ -47,8 +47,8 @@
         <item name="android:background">@drawable/line_bluegray</item>
     </style>
     <style name="widget_listview">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:listSelector">@drawable/listview_item_selector</item>
         <item name="android:divider">@drawable/listview_divider_line</item>
