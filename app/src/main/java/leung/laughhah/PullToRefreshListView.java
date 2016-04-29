@@ -123,16 +123,13 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 						 int visibleItemCount, int totalItemCount) {
 		firstItemIndex = firstVisiableItem;
 
-		Log.d("leungadd", "firstvisiableitem="+firstVisiableItem +"totalitemCount=" +totalItemCount+"visibleitemcount="+visibleItemCount);
 	}
 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		currentScrollState = scrollState;
-		Log.d("leungadd", "scrollstate=" +scrollState);
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		Log.d("leungadd", "ontouchevent action=" +event.getAction());
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			if (firstItemIndex == 0 && !isRecored) {
