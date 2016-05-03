@@ -9,7 +9,7 @@
         android:id="@+id/news_detail_header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_bg"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="2dip"
@@ -27,7 +27,7 @@
             android:id="@+id/news_detail_head_title"
             style="@style/detail_head_title"
             android:layout_gravity="center"
-            android:text="新闻详细" />
+            android:text="@string/Joke_detail" />
 
         <ImageView
             android:id="@+id/news_detail_refresh"
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6.0dip"
-                        android:text="发表时间"
+                        android:text="@string/publish_time"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_12" />
 

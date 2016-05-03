@@ -11,4 +11,7 @@
     <string name="pull_to_refresh_refreshing_label">Loading...</string>
     <string name="pull_to_refresh_tap_label">Pull Refresh</string>
     <string name="pull_to_refresh_update">Update:</string>
+    <string name="already_newest">Already Newest</string>
+    <string name="publish_time">Publish Time</string>
+    <string name="Joke_detail">Joke Detail</string>
 </resources>

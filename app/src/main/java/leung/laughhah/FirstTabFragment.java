@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 
 //import net.sf.json.JSONObject;
@@ -66,6 +67,13 @@ public class FirstTabFragment extends Fragment {
                         view.getContext().startActivity(intent);
                     }
                 });
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("leungadd", "we are in onrefresh");
+                new RequestNewJokeTask().execute("1111");
+            }
+        });
         return rootView;
     }
 
@@ -110,6 +118,7 @@ public class FirstTabFragment extends Fragment {
         public static final String APPKEY ="5c6a5e034defb873b5d4971ba36cfdb4";
         public  org.json.JSONObject myObject = null;
         public org.json.JSONObject afterReplaceObject = null;
+        public org.json.JSONObject finalJsonObject = null;
 
 
         protected org.json.JSONObject doInBackground(String... urls) {
@@ -125,20 +134,34 @@ public class FirstTabFragment extends Fragment {
 
         protected void onPostExecute(org.json.JSONObject result) {
             Log.d("leungadd", "onpostexcute");
+            String revertReplaceString = "";
+            boolean noUpdate = false;
             try {
                 if (afterReplaceObject != null) {
-                    JSONArray jsonArray = afterReplaceObject.optJSONArray("data");
-                    for(int i=0; i < jsonArray.length(); i++){
-                        org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String content = jsonObject.optString("content");
-                        String updateTime = jsonObject.optString("updatetime");
-                        Log.d("leungadd jsonobject ", jsonObject.toString());
-                        news = new News( content.substring(0,20), updateTime, content);
-                        newsDataList.add(news);
-                       // data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
+                    revertReplaceString = afterReplaceObject.toString().replace(".5.5","\\r\\n");
+                    revertReplaceString = revertReplaceString.replaceAll("\\s\\s","\\\\r\\\\n");
+                    finalJsonObject = new org.json.JSONObject(revertReplaceString);
+                    JSONArray jsonArray = finalJsonObject.optJSONArray("data");
+                    if(newsDataList.size() > 0 &&
+                            jsonArray.getJSONObject(0).optString("updatetime").equals(newsDataList.get(0).getPubDate())) {
+                        noUpdate = true;
+                        Log.d("leungadd", "there is no update");
+                        Toast.makeText(getContext(),R.string.already_newest,Toast.LENGTH_SHORT).show();
+                    } else {
+                        newsDataList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String content = jsonObject.optString("content");
+                            String updateTime = jsonObject.optString("updatetime");
+                            Log.d("leungadd jsonobject ", jsonObject.toString());
+                            news = new News(content.substring(0, 20), updateTime, content);
+                            newsDataList.add(news);
+                            // data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
+                        }
                     }
                 }
                 newsListViewAdapter.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
             }catch (Exception e) {
                     e.printStackTrace();
                     Log.d("leungadd", "getrequest2 exception " +e.toString());
@@ -167,6 +190,7 @@ public class FirstTabFragment extends Fragment {
                     System.out.println(myObject.get("result"));
                     afterReplaceString = myObject.get("result").toString().replace("\\r\\n",".5.5");
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
+                    /*
                     JSONArray jsonArray = afterReplaceObject.optJSONArray("data");
                     for(int i=0; i < jsonArray.length(); i++){
                         org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -177,7 +201,7 @@ public class FirstTabFragment extends Fragment {
                         Log.d("leungadd jsonobject222 ", jsonObject.toString());
 
                         data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
-                    }
+                    }*/
                     //Log.d("leungadd111", afterReplaceObject.get("result").toString());
                    // Log.d("leungadd", data);
                 }else{

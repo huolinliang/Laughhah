@@ -11,4 +11,7 @@
     <string name="pull_to_refresh_refreshing_label">加载中...</string>
     <string name="pull_to_refresh_tap_label">下拉刷新</string>
     <string name="pull_to_refresh_update">最近更新：</string>
+    <string name="already_newest">已经是最新</string>
+    <string name="publish_time">发表时间</string>
+    <string name="Joke_detail">笑话大全</string>
 </resources>
