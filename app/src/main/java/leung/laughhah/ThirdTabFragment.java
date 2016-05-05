@@ -1,5 +1,6 @@
 package leung.laughhah;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.koushikdutta.ion.Ion;
@@ -50,6 +52,21 @@ public class ThirdTabFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Log.d("leungadd", "thirdtab onitemclick position=" +position+1);
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                View imgEntryView = inflater.inflate(R.layout.dialog_photo_entry, null);
+                final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
+                ZoomImageView img = (ZoomImageView) imgEntryView.findViewById(R.id.dialog_imageview);
+                Ion.with(img)
+                        .centerCrop()
+                        .load(newsDataList_3.get(position).getBody());
+                dialog.setView(imgEntryView);
+                dialog.show();
+
+                imgEntryView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View paramView) {
+                        dialog.cancel();
+                    }
+                });
             }
         });
         return rootView;

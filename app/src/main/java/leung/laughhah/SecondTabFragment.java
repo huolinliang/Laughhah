@@ -70,6 +70,7 @@ public class SecondTabFragment extends Fragment {
                             currentPage++;
                             lazyLoad();
                         }
+                        break;
                 }
             }
 
