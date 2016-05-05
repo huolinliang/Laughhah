@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="tab_new_joke">New Joke</string>
-    <string name="tab_history_joke">Pre Joke</string>
+    <string name="tab_history_joke">More Joke</string>
     <string name="tab_new_pic">New Pic</string>
     <string name="tab_history_pic">Pre Pic</string>
     <string name="pull_to_refresh_pull_label">Pull Refresh</string>

@@ -21,7 +21,7 @@ public class NewsDetail extends Activity {
 		setContentView(R.layout.news_detail);
 		this.initView();
 		this.initData();
-		this.testNewsData();
+		//this.testNewsData();
 	}
 
 
@@ -31,15 +31,23 @@ public class NewsDetail extends Activity {
 		intent.getExtras();
 		Bundle data = intent.getExtras();
 		int position = data.getInt("news_id");
+		int fragment_id = data.getInt("fragment_id");
 		Log.d("leungadd 接收到的数据", String.valueOf(position));
+		Log.d("leungadd", "接收到的fragment id=" + String.valueOf(fragment_id));
 
-
-		News news = FirstTabFragment.newsDataList.get(position-1);
-		news_detail_title.setText(news.getTitle());
-		//news_detail_author.setText(news.getAuthor());
-		news_detail_date.setText(news.getPubDate());
-		//news_detail_commentcount.setText(String.valueOf(news.getCommentCount()));
-		news_detail_body.setText(news.getBody());
+		if(fragment_id == 1) {
+			News news = FirstTabFragment.newsDataList.get(position - 1);
+			news_detail_title.setText(news.getTitle());
+			//news_detail_author.setText(news.getAuthor());
+			news_detail_date.setText(news.getPubDate());
+			//news_detail_commentcount.setText(String.valueOf(news.getCommentCount()));
+			news_detail_body.setText(news.getBody());
+		}else if(fragment_id == 2) {
+			News news = SecondTabFragment.newsDataList_2.get(position - 1);
+			news_detail_title.setText(news.getTitle());
+			news_detail_date.setText(news.getPubDate());
+			news_detail_body.setText(news.getBody());
+		}
 
 	}
 

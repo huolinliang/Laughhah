@@ -15,13 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
-
-
-//import net.sf.json.JSONObject;
-
-
 import org.json.JSONArray;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -42,17 +36,18 @@ public class FirstTabFragment extends Fragment {
     private News news;
     public static List<News> newsDataList = new ArrayList<News>();
     private NewsListViewAdapter newsListViewAdapter;
+    protected boolean isVisible;
+    private int fragmentId = 1;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("leungadd", "firsttabfragment oncreateview");
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
-        /*if(newsDataList.size() == 0) {
-            this.initNewsData();
-            this.testLoadNewsData();
+        //只有可见时才进行数据加载
+        /*if(getUserVisibleHint()) {
+            new RequestNewJokeTask().execute("1111");
         }*/
-        new RequestNewJokeTask().execute("1111");
 
         newsListViewAdapter = new NewsListViewAdapter(getContext(), newsDataList,R.layout.news_list_item);
         pullToRefreshListView = (PullToRefreshListView)rootView.findViewById(R.id.frame_listview_news);
@@ -61,9 +56,11 @@ public class FirstTabFragment extends Fragment {
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
+                        Log.d("leungadd", "firsttab onitemclick position=" +position);
                         Intent intent = new Intent(view.getContext(),
                                 NewsDetail.class);
                         intent.putExtra("news_id", position);
+                        intent.putExtra("fragment_id", fragmentId);
                         view.getContext().startActivity(intent);
                     }
                 });
@@ -77,6 +74,30 @@ public class FirstTabFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * 在这里实现Fragment数据的缓加载.
+     * @param isVisibleToUser
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            onVisible();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
+    }
+    protected void onVisible(){
+        lazyLoad();
+    }
+    protected void onInvisible(){}
+    //懒加载
+    protected void lazyLoad() {
+        Log.d("leungadd", "in firsttab lazyload");
+        new FirstTabFragment.RequestNewJokeTask().execute("1111");
+    }
     @Override
     public void onDestroy() {
         Log.e("leungadd", "FistFragment onDestroy");
@@ -166,9 +187,6 @@ public class FirstTabFragment extends Fragment {
                     e.printStackTrace();
                     Log.d("leungadd", "getrequest2 exception " +e.toString());
                 }
-
-
-            //execute.setEnabled(true);
         }
 
         //.最新笑话
@@ -190,20 +208,6 @@ public class FirstTabFragment extends Fragment {
                     System.out.println(myObject.get("result"));
                     afterReplaceString = myObject.get("result").toString().replace("\\r\\n",".5.5");
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
-                    /*
-                    JSONArray jsonArray = afterReplaceObject.optJSONArray("data");
-                    for(int i=0; i < jsonArray.length(); i++){
-                        org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-
-                        String content = jsonObject.optString("content");
-                        String updateTime = jsonObject.optString("updatetime");
-                        Log.d("leungadd jsonobject222 ", jsonObject.toString());
-
-                        data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
-                    }*/
-                    //Log.d("leungadd111", afterReplaceObject.get("result").toString());
-                   // Log.d("leungadd", data);
                 }else{
                     System.out.println(myObject.get("error_code")+":"+myObject.get("reason"));
                     Log.d("leungadd", myObject.get("reason").toString());

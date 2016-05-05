@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
+    compile files('libs/androidasync-2.1.6.jar')
+    compile files('libs/ion-2.1.6.jar')
 }
