@@ -683,7 +683,7 @@ public class ZoomImageView extends ImageView {
             // to or less than the corresponding dimension of the view (minus padding).
             // The image is then centered in the view
             // leave to super class
-            super.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            super.setScaleType(ScaleType.FIT_CENTER);
             // the internal Matrix in the super class(that can get with ImageView#getImageMatrix)
             // never updated when called setScaleType on current implementation.
             // therefore call setFrame to update internal Matrix.

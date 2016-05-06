@@ -21,7 +21,6 @@ public class NewsDetail extends Activity {
 		setContentView(R.layout.news_detail);
 		this.initView();
 		this.initData();
-		//this.testNewsData();
 	}
 
 
@@ -61,19 +60,4 @@ public class NewsDetail extends Activity {
 	}
 
 
-	private void testNewsData() {
-
-		Intent intent = getIntent();
-		intent.getExtras();
-		Bundle data = intent.getExtras();
-		int position = data.getInt("news_id");
-		Log.d("leungadd 测试接点击列表项位置", String.valueOf(position));
-		News news = FirstTabFragment.newsDataList.get(position-1);
-		Log.d("leungadd标题", news.getTitle());
-		//Log.w("作者", news.getAuthor());
-		Log.d("leungadd 发表日期", news.getPubDate());
-		//Log.w("评论数", String.valueOf(news.getCommentCount()));
-		Log.d("leungadd 内容", news.getBody());
-
-	}
 }

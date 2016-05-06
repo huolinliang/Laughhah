@@ -6,9 +6,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -57,16 +60,11 @@ public class ThirdTabFragment extends Fragment {
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
                 ZoomImageView img = (ZoomImageView) imgEntryView.findViewById(R.id.dialog_imageview);
                 Ion.with(img)
-                        .centerCrop()
+                        .fitCenter()
                         .load(newsDataList_3.get(position).getBody());
                 dialog.setView(imgEntryView);
                 dialog.show();
 
-                imgEntryView.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View paramView) {
-                        dialog.cancel();
-                    }
-                });
             }
         });
         return rootView;
