@@ -15,13 +15,13 @@
         android:paddingLeft="2dip"
         android:paddingRight="2dip" >
 
-        <ImageView
+        <!--ImageView
             android:id="@+id/news_detail_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:background="@drawable/head_home"
-            android:clickable="true" />
+            android:clickable="true" /-->
 
         <TextView
             android:id="@+id/news_detail_head_title"
@@ -115,6 +115,13 @@
                     android:background="@color/white"
                     android:textSize="20sp"
                     android:textColor="@color/black" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/copy_button_selector"
+                    android:layout_marginTop="@dimen/text_size_10"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/text_size_10" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

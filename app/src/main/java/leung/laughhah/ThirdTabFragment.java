@@ -41,7 +41,7 @@ public class ThirdTabFragment extends Fragment {
     private ImgJokes imgJokes;
     public static List<ImgJokes> newsDataList_3 = new ArrayList<ImgJokes>();
     private ImgsListViewAdapter imgsListViewAdapter;
-    private ListView thirdListView;
+    private PullToRefreshListView thirdListView;
     protected boolean isVisible;
 
 
@@ -49,22 +49,29 @@ public class ThirdTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_third, container, false);
         imgsListViewAdapter = new ImgsListViewAdapter(getContext(), newsDataList_3, R.layout.jokeimgs_list_item);
-        thirdListView = (ListView) rootView.findViewById(R.id.frame_listview_news_3);
+        thirdListView = (PullToRefreshListView) rootView.findViewById(R.id.frame_listview_news_3);
         thirdListView.setAdapter(imgsListViewAdapter);
         thirdListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.d("leungadd", "thirdtab onitemclick position=" +position+1);
+                Log.d("leungadd", "thirdtab onitemclick position=" +position);
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 View imgEntryView = inflater.inflate(R.layout.dialog_photo_entry, null);
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
                 ZoomImageView img = (ZoomImageView) imgEntryView.findViewById(R.id.dialog_imageview);
                 Ion.with(img)
                         .fitCenter()
-                        .load(newsDataList_3.get(position).getBody());
+                        .load(newsDataList_3.get(position-1).getBody());
                 dialog.setView(imgEntryView);
                 dialog.show();
 
+            }
+        });
+        thirdListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("leungadd", "thirdtab onrefresh");
+                new ThirdTabFragment.RequestNewGifTask().execute("1111");
             }
         });
         return rootView;
@@ -157,11 +164,11 @@ public class ThirdTabFragment extends Fragment {
                             Log.d("leungadd jsonobject ", jsonObject.toString());
                             imgJokes = new ImgJokes(title, updateTime, imgUrl);
                             newsDataList_3.add(imgJokes);
-                            // data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
                         }
                     }
                 }
                 imgsListViewAdapter.notifyDataSetChanged();
+                thirdListView.onRefreshComplete();
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.d("leungadd", "getrequest2 exception " + e.toString());

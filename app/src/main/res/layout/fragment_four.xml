@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!--TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#33FF00FF"
@@ -12,7 +12,9 @@
         android:minHeight="800dp"
         android:text="TAB 4"
         android:textColor="#FF000000"
-        android:textSize="20dp" />
-
+        android:textSize="20dp" /-->
+    <ListView
+        android:id="@+id/frame_listview_news_4"
+        style="@style/widget_listview" />
 
 </LinearLayout>

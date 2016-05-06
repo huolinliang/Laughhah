@@ -4,16 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#330F0FF0"
-        android:gravity="center"
-        android:minHeight="800dp"
-        android:text="TAB 3"
-        android:textColor="#FF000000"
-        android:textSize="20dp" /-->
-    <ListView
+    <leung.laughhah.PullToRefreshListView
         android:id="@+id/frame_listview_news_3"
         style="@style/widget_listview" />
 </LinearLayout>

@@ -28,9 +28,7 @@ public class ImgsListViewAdapter extends BaseAdapter {
 
 	static class ListItemView {
 		public TextView title;
-		//public TextView author;
 		public TextView date;
-		//public TextView count;
 		public ImageView flag;
         public ImageView jokeImgView;
 	}
@@ -70,10 +68,6 @@ public class ImgsListViewAdapter extends BaseAdapter {
 			listItemView = new ListItemView();
 			listItemView.title = (TextView) convertView
 					.findViewById(R.id.news_listitem_title);
-			//listItemView.author = (TextView) convertView
-			//		.findViewById(R.id.news_listitem_author);
-			//listItemView.count = (TextView) convertView
-			//		.findViewById(R.id.news_listitem_commentCount);
 			listItemView.date = (TextView) convertView
 					.findViewById(R.id.news_listitem_date);
 			listItemView.flag = (ImageView) convertView

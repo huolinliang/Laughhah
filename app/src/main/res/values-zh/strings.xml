@@ -3,9 +3,9 @@
     <string name="action_settings">设置</string>
 
     <string name="tab_new_joke">最新笑话</string>
-    <string name="tab_history_joke">看到吐</string>
+    <string name="tab_history_joke">海量笑话</string>
     <string name="tab_new_pic">最新趣图</string>
-    <string name="tab_history_pic">趣图回顾</string>
+    <string name="tab_history_pic">海量趣图</string>
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">松开刷新</string>
     <string name="pull_to_refresh_refreshing_label">加载中...</string>
