@@ -44,11 +44,6 @@ public class FirstTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("leungadd", "firsttabfragment oncreateview");
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
-        //只有可见时才进行数据加载
-        /*if(getUserVisibleHint()) {
-            new RequestNewJokeTask().execute("1111");
-        }*/
-
         newsListViewAdapter = new NewsListViewAdapter(getContext(), newsDataList,R.layout.news_list_item);
         pullToRefreshListView = (PullToRefreshListView)rootView.findViewById(R.id.frame_listview_news);
         pullToRefreshListView.setAdapter(newsListViewAdapter);
@@ -103,29 +98,6 @@ public class FirstTabFragment extends Fragment {
         Log.e("leungadd", "FistFragment onDestroy");
         newsDataList.clear();
         super.onDestroy();
-    }
-
-
-    /**
-     * 初始化新闻内容(插入20条新闻测试数据)
-     */
-    private void initNewsData() {
-        for (int i = 1; i <= 20; i++) {
-            news = new News("简单的新闻列表事例标题" + i, "2014-1-" + i, "新闻内容" + i);
-            newsDataList.add(news);
-        }
-    }
-    /**
-     * 测试读取新闻列表项中的数据
-     */
-    private void testLoadNewsData() {
-        Log.d("当前DataList中数量为", String.valueOf(newsDataList.size()));
-        for (int i = 1; i <= newsDataList.size(); i++) {
-            News news = newsDataList.get(i - 1);
-            Log.i("第" + i + "条新闻标题", news.getTitle());
-            Log.i("第" + i + "条新闻发表日期", news.getPubDate());
-            Log.i("第" + i + "条新闻内容", news.getBody());
-        }
     }
 
     public class RequestNewJokeTask extends AsyncTask<String, Void, org.json.JSONObject> {
