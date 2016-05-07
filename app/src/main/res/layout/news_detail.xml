@@ -118,6 +118,8 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/copy_button"
+                    android:background="@drawable/shape"
                     android:src="@drawable/copy_button_selector"
                     android:layout_marginTop="@dimen/text_size_10"
                     android:layout_gravity="end"

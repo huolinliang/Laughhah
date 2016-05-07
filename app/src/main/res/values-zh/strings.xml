@@ -14,4 +14,5 @@
     <string name="already_newest">已经是最新</string>
     <string name="publish_time">发表时间</string>
     <string name="Joke_detail">笑话大全</string>
+    <string name="copy_content">已经复制到剪贴板</string>
 </resources>

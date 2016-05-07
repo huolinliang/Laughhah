@@ -14,4 +14,5 @@
     <string name="already_newest">Already Newest</string>
     <string name="publish_time">Publish Time</string>
     <string name="Joke_detail">Joke Detail</string>
+    <string name="copy_content">Copy done</string>
 </resources>

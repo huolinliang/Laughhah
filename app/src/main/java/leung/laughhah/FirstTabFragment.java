@@ -40,6 +40,7 @@ public class FirstTabFragment extends Fragment {
     private int fragmentId = 1;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("leungadd", "firsttabfragment oncreateview");
@@ -126,7 +127,7 @@ public class FirstTabFragment extends Fragment {
 
 
         protected void onPostExecute(org.json.JSONObject result) {
-            Log.d("leungadd", "onpostexcute");
+            Log.d("leungadd", "firsttab onpostexcute");
             String revertReplaceString = "";
             boolean noUpdate = false;
             try {

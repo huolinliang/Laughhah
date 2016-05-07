@@ -15,6 +15,7 @@
         android:textColor="#FF000000"
         android:textSize="20dp" /-->
 
+
     <leung.laughhah.PullToRefreshListView
         android:id="@+id/frame_listview_news"
         style="@style/widget_listview" />
