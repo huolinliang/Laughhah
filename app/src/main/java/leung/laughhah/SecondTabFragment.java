@@ -40,10 +40,10 @@ public class SecondTabFragment extends Fragment {
     protected boolean isVisible;
     private int fragment_id = 2;
     private int currentPage = 2;
+    private static final String TAG = "leungadd";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("leungadd", "secondtabfragment oncreateview");
         View rootView = inflater.inflate(R.layout.fragment_second, container, false);
         newsListViewAdapter_2 = new NewsListViewAdapter(getContext(), newsDataList_2, R.layout.news_list_item);
         secondListView = (ListView) rootView.findViewById(R.id.frame_listview_news_2);
@@ -51,7 +51,7 @@ public class SecondTabFragment extends Fragment {
         secondListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.d("leungadd", "secondtab onitemclick position=" +position+1);
+                Log.d(TAG, "secondtab onitemclick position=" +position+1);
                 Intent intent = new Intent(view.getContext(),
                         NewsDetail.class);
                 intent.putExtra("news_id", position+1);
@@ -66,7 +66,6 @@ public class SecondTabFragment extends Fragment {
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         if (secondListView.getLastVisiblePosition() == (secondListView
                                 .getCount() - 1)) {
-                            //Log.d("leungadd", "secondlistview 滑倒底部");
                             currentPage++;
                             lazyLoad();
                         }
@@ -108,13 +107,11 @@ public class SecondTabFragment extends Fragment {
 
     //懒加载
     protected void lazyLoad() {
-        Log.d("leungadd", "in secondtab lazyload");
         new SecondTabFragment.RequestHistoryJokeTask().execute("1111");
     }
 
     @Override
     public void onDestroy() {
-        Log.e("leungadd", "SecondFragment onDestroy");
         newsDataList_2.clear();
         super.onDestroy();
     }
@@ -145,7 +142,6 @@ public class SecondTabFragment extends Fragment {
 
 
         protected void onPostExecute(org.json.JSONObject result) {
-            Log.d("leungadd", "onpostexcute");
             String revertReplaceString = "";
             boolean noUpdate = false;
             try {
@@ -157,7 +153,7 @@ public class SecondTabFragment extends Fragment {
                     if (newsDataList_2.size() > 0 &&
                             jsonArray.getJSONObject(0).optString("updatetime").equals(newsDataList_2.get(0).getPubDate())) {
                         noUpdate = true;
-                        Log.d("leungadd", "there is no update");
+                        Log.d(TAG, "there is no update");
                         //Toast.makeText(getContext(), R.string.already_newest, Toast.LENGTH_SHORT).show();
                     } else {
                         //newsDataList_2.clear();
@@ -165,7 +161,6 @@ public class SecondTabFragment extends Fragment {
                             org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String content = jsonObject.optString("content");
                             String updateTime = jsonObject.optString("updatetime");
-                            Log.d("leungadd jsonobject ", jsonObject.toString());
                             news_2 = new News(content.substring(0, 20), updateTime, content);
                             newsDataList_2.add(news_2);
                             // data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
@@ -175,13 +170,12 @@ public class SecondTabFragment extends Fragment {
                 newsListViewAdapter_2.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 
         //2.按更新时间查询笑话
         public void getRequest1() {
-            Log.d("leungadd", "we are in getrequest1");
             String result = null;
             String data = "";
             String afterReplaceString = "";
@@ -202,11 +196,11 @@ public class SecondTabFragment extends Fragment {
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
                 } else {
                     System.out.println(myObject.get("error_code") + ":" + myObject.get("reason"));
-                    Log.d("leungadd", myObject.get("reason").toString());
+                    Log.d(TAG, myObject.get("reason").toString());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 

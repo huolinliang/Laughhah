@@ -341,11 +341,9 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 		int lpHeight = p.height;
 		int childHeightSpec;
 		if (lpHeight > 0) {
-			Log.d("leungadd", "lpHeight="+lpHeight);
 			childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
 					MeasureSpec.EXACTLY);
 		} else {
-			Log.d("leungadd", "22 lpHeight="+lpHeight);
 			childHeightSpec = MeasureSpec.makeMeasureSpec(0,
 					MeasureSpec.UNSPECIFIED);
 		}

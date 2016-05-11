@@ -46,8 +46,6 @@ public class NewsDetail extends Activity {
 		Bundle data = intent.getExtras();
 		int position = data.getInt("news_id");
 		int fragment_id = data.getInt("fragment_id");
-		Log.d("leungadd 接收到的数据", String.valueOf(position));
-		Log.d("leungadd", "接收到的fragment id=" + String.valueOf(fragment_id));
 
 		if(fragment_id == 1) {
 			news = FirstTabFragment.newsDataList.get(position - 1);

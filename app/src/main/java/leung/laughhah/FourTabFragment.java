@@ -41,6 +41,7 @@ public class FourTabFragment extends Fragment {
     protected boolean isVisible;
     private int fragment_id = 4;
     private int currentPage = 2;
+    private static final String TAG = "leungadd";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class FourTabFragment extends Fragment {
         fourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.d("leungadd", "fourtab onitemclick position=" +position);
+                Log.d(TAG, "fourtab onitemclick position=" +position);
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 View imgEntryView = inflater.inflate(R.layout.dialog_photo_entry, null);
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
@@ -71,7 +72,6 @@ public class FourTabFragment extends Fragment {
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         if (fourListView.getLastVisiblePosition() == (fourListView
                                 .getCount() - 1)) {
-                            //Log.d("leungadd", "secondlistview 滑倒底部");
                             currentPage++;
                             lazyLoad();
                         }
@@ -113,13 +113,13 @@ public class FourTabFragment extends Fragment {
 
     //懒加载
     protected void lazyLoad() {
-        Log.d("leungadd", "in thirdtab lazyload");
+        Log.d(TAG, "in fourtab lazyload");
         new FourTabFragment.RequestHistoryGifTask().execute("1111");
     }
 
     @Override
     public void onDestroy() {
-        Log.e("leungadd", "ThirdFragment onDestroy");
+        Log.e(TAG, "FourFragment onDestroy");
         newsDataList_4.clear();
         super.onDestroy();
     }
@@ -151,7 +151,6 @@ public class FourTabFragment extends Fragment {
 
 
         protected void onPostExecute(org.json.JSONObject result) {
-            Log.d("leungadd", "fourtab onpostexcute");
             String revertReplaceString = "";
             boolean noUpdate = false;
             try {
@@ -163,7 +162,7 @@ public class FourTabFragment extends Fragment {
                     if (newsDataList_4.size() > 0 &&
                             jsonArray.getJSONObject(0).optString("updatetime").equals(newsDataList_4.get(0).getPubDate())) {
                         noUpdate = true;
-                        Log.d("leungadd", "there is no update");
+                        Log.d(TAG, "there is no update");
                         //Toast.makeText(getContext(), R.string.already_newest, Toast.LENGTH_SHORT).show();
                     } else {
                         //newsDataList_2.clear();
@@ -172,7 +171,6 @@ public class FourTabFragment extends Fragment {
                             String title = jsonObject.optString("content");
                             String updateTime = jsonObject.optString("updatetime");
                             String imgUrl = jsonObject.optString("url");
-                            Log.d("leungadd jsonobject ", jsonObject.toString());
                             imgJokes = new ImgJokes(title, updateTime, imgUrl);
                             newsDataList_4.add(imgJokes);
                         }
@@ -181,7 +179,7 @@ public class FourTabFragment extends Fragment {
                 imgsListViewAdapter.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 
@@ -206,11 +204,11 @@ public class FourTabFragment extends Fragment {
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
                 } else {
                     System.out.println(myObject.get("error_code") + ":" + myObject.get("reason"));
-                    Log.d("leungadd", myObject.get("reason").toString());
+                    Log.d(TAG, myObject.get("reason").toString());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 

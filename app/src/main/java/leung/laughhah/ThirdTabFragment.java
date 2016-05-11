@@ -43,6 +43,7 @@ public class ThirdTabFragment extends Fragment {
     private ImgsListViewAdapter imgsListViewAdapter;
     private PullToRefreshListView thirdListView;
     protected boolean isVisible;
+    private static final String TAG = "leungadd";
 
 
     @Override
@@ -54,7 +55,7 @@ public class ThirdTabFragment extends Fragment {
         thirdListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.d("leungadd", "thirdtab onitemclick position=" +position);
+                Log.d(TAG, "thirdtab onitemclick position=" +position);
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 View imgEntryView = inflater.inflate(R.layout.dialog_photo_entry, null);
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
@@ -70,7 +71,7 @@ public class ThirdTabFragment extends Fragment {
         thirdListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("leungadd", "thirdtab onrefresh");
+                Log.d(TAG, "thirdtab onrefresh");
                 new ThirdTabFragment.RequestNewGifTask().execute("1111");
             }
         });
@@ -103,13 +104,13 @@ public class ThirdTabFragment extends Fragment {
 
     //懒加载
     protected void lazyLoad() {
-        Log.d("leungadd", "in thirdtab lazyload");
+        Log.d(TAG, "in thirdtab lazyload");
         new ThirdTabFragment.RequestNewGifTask().execute("1111");
     }
 
     @Override
     public void onDestroy() {
-        Log.e("leungadd", "ThirdFragment onDestroy");
+        Log.e(TAG, "ThirdFragment onDestroy");
         newsDataList_3.clear();
         super.onDestroy();
     }
@@ -140,7 +141,6 @@ public class ThirdTabFragment extends Fragment {
 
 
         protected void onPostExecute(org.json.JSONObject result) {
-            Log.d("leungadd", "thirdtab onpostexcute");
             String revertReplaceString = "";
             boolean noUpdate = false;
             try {
@@ -152,7 +152,7 @@ public class ThirdTabFragment extends Fragment {
                     if (newsDataList_3.size() > 0 &&
                             jsonArray.getJSONObject(0).optString("updatetime").equals(newsDataList_3.get(0).getPubDate())) {
                         noUpdate = true;
-                        Log.d("leungadd", "there is no update");
+                        Log.d(TAG, "there is no update");
                         //Toast.makeText(getContext(), R.string.already_newest, Toast.LENGTH_SHORT).show();
                     } else {
                         //newsDataList_2.clear();
@@ -161,7 +161,6 @@ public class ThirdTabFragment extends Fragment {
                             String title = jsonObject.optString("content");
                             String updateTime = jsonObject.optString("updatetime");
                             String imgUrl = jsonObject.optString("url");
-                            Log.d("leungadd jsonobject ", jsonObject.toString());
                             imgJokes = new ImgJokes(title, updateTime, imgUrl);
                             newsDataList_3.add(imgJokes);
                         }
@@ -171,7 +170,7 @@ public class ThirdTabFragment extends Fragment {
                 thirdListView.onRefreshComplete();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 
@@ -194,11 +193,11 @@ public class ThirdTabFragment extends Fragment {
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
                 } else {
                     System.out.println(myObject.get("error_code") + ":" + myObject.get("reason"));
-                    Log.d("leungadd", myObject.get("reason").toString());
+                    Log.d(TAG, myObject.get("reason").toString());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " + e.toString());
+                Log.d(TAG, "getrequest2 exception " + e.toString());
             }
         }
 

@@ -38,12 +38,12 @@ public class FirstTabFragment extends Fragment {
     private NewsListViewAdapter newsListViewAdapter;
     protected boolean isVisible;
     private int fragmentId = 1;
+    private static final String TAG = "leungadd";
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("leungadd", "firsttabfragment oncreateview");
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
         newsListViewAdapter = new NewsListViewAdapter(getContext(), newsDataList,R.layout.news_list_item);
         pullToRefreshListView = (PullToRefreshListView)rootView.findViewById(R.id.frame_listview_news);
@@ -52,7 +52,7 @@ public class FirstTabFragment extends Fragment {
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                        Log.d("leungadd", "firsttab onitemclick position=" +position);
+                        Log.d(TAG, "firsttab onitemclick position=" +position);
                         Intent intent = new Intent(view.getContext(),
                                 NewsDetail.class);
                         intent.putExtra("news_id", position);
@@ -63,7 +63,6 @@ public class FirstTabFragment extends Fragment {
         pullToRefreshListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("leungadd", "we are in onrefresh");
                 new RequestNewJokeTask().execute("1111");
             }
         });
@@ -91,12 +90,10 @@ public class FirstTabFragment extends Fragment {
     protected void onInvisible(){}
     //懒加载
     protected void lazyLoad() {
-        Log.d("leungadd", "in firsttab lazyload");
         new FirstTabFragment.RequestNewJokeTask().execute("1111");
     }
     @Override
     public void onDestroy() {
-        Log.e("leungadd", "FistFragment onDestroy");
         newsDataList.clear();
         super.onDestroy();
     }
@@ -127,7 +124,6 @@ public class FirstTabFragment extends Fragment {
 
 
         protected void onPostExecute(org.json.JSONObject result) {
-            Log.d("leungadd", "firsttab onpostexcute");
             String revertReplaceString = "";
             boolean noUpdate = false;
             try {
@@ -139,7 +135,7 @@ public class FirstTabFragment extends Fragment {
                     if(newsDataList.size() > 0 &&
                             jsonArray.getJSONObject(0).optString("updatetime").equals(newsDataList.get(0).getPubDate())) {
                         noUpdate = true;
-                        Log.d("leungadd", "there is no update");
+                        Log.d(TAG, "there is no update");
                         Toast.makeText(getContext(),R.string.already_newest,Toast.LENGTH_SHORT).show();
                     } else {
                         newsDataList.clear();
@@ -147,10 +143,8 @@ public class FirstTabFragment extends Fragment {
                             org.json.JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String content = jsonObject.optString("content");
                             String updateTime = jsonObject.optString("updatetime");
-                            Log.d("leungadd jsonobject ", jsonObject.toString());
                             news = new News(content.substring(0, 20), updateTime, content);
                             newsDataList.add(news);
-                            // data += "Node"+i+" : \n content= "+ content +" \n updatetime= "+ updateTime +" \n ";
                         }
                     }
                 }
@@ -158,13 +152,12 @@ public class FirstTabFragment extends Fragment {
                 pullToRefreshListView.onRefreshComplete();
             }catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("leungadd", "getrequest2 exception " +e.toString());
+                    Log.d(TAG, "getrequest2 exception " +e.toString());
                 }
         }
 
         //.最新笑话
         public void getRequest2(){
-            Log.d("leungadd", "we are in getrequest2");
             String result = null;
             String data = "";
             String afterReplaceString = "";
@@ -183,11 +176,11 @@ public class FirstTabFragment extends Fragment {
                     afterReplaceObject = new org.json.JSONObject(afterReplaceString);
                 }else{
                     System.out.println(myObject.get("error_code")+":"+myObject.get("reason"));
-                    Log.d("leungadd", myObject.get("reason").toString());
+                    Log.d(TAG, myObject.get("reason").toString());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("leungadd", "getrequest2 exception " +e.toString());
+                Log.d(TAG, "getrequest2 exception " +e.toString());
             }
         }
 
